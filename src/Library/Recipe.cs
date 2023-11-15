@@ -16,6 +16,9 @@ namespace Full_GRASP_And_SOLID
 
         public Product FinalProduct { get; set; }
 
+        public bool Cooked { get; private set; }
+
+
         // Agregado por Creator
         public void AddStep(Product input, double quantity, Equipment equipment, int time)
         {
@@ -62,5 +65,29 @@ namespace Full_GRASP_And_SOLID
 
             return result;
         }
+
+        public void Cook()
+        {
+            throw new NotImplementedException();
+        }
+
+        private class TimerAdapter : TimerClient
+        {
+            private Recipe recipe;
+
+            public TimerAdapter(Recipe recipe)
+            {
+                this.recipe = recipe;
+            }
+
+            public object TimeOutId { get; }
+
+            public void TimeOut()
+            {
+                this.recipe.Cooked = true;
+            }
+        }
+
     }
+
 }
